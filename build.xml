@@ -1,10 +1,13 @@
-<project name="JunitTest" default="test" basedir=".">
+<project name="JunitTest" default="test" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
    <property name="testdir" location="test" />
    <property name="srcdir" location="src" />
+   <property name="reportdir" location="report" />
    <property name="full-compile" value="true" />
+
    <path id="classpath.base"/>
    <path id="classpath.test">
-      <pathelement location="lib/junit-4.12.jar" />
+
+    <pathelement location="lib/junit-4.12.jar" />
 
     <pathelement location="lib/apache-mime4j-0.6.jar" />
     <pathelement location="lib/bsh-1.3.0.jar" />
@@ -45,6 +48,13 @@
     <pathelement location="lib/xercesImpl-2.11.0.jar" />
     <pathelement location="lib/xml-apis-1.4.01.jar" />
 
+    <pathelement location="lib/jacocoagent.jar" />
+    <pathelement location="lib/jacocoant.jar" />
+    <pathelement location="lib/org.jacoco.agent-0.7.5.201505241946.jar" />
+    <pathelement location="lib/org.jacoco.ant-0.7.5.201505241946.jar" />
+    <pathelement location="lib/org.jacoco.core-0.7.5.201505241946.jar" />
+    <pathelement location="lib/org.jacoco.report-0.7.5.201505241946.jar" />
+
       <pathelement location="${testdir}" />
       <pathelement location="${srcdir}" />
       <path refid="classpath.base" />
@@ -64,7 +74,8 @@
    </target>
 
    <target name="test" depends="compile">
-      <junit fork="no" haltonfailure="false" printsummary="true" haltonerror="false" showoutput="false">
+    <jacoco:coverage>
+      <junit fork="yes" haltonfailure="false" printsummary="true" haltonerror="false" showoutput="false">
          <classpath refid="classpath.test" />
          <formatter type="plain" usefile="false" />
 
@@ -93,5 +104,29 @@
          </batchtest>
 -->
       </junit>
+    </jacoco:coverage>
+   </target>
+
+   <target name="report" depends="test">
+     <jacoco:report>
+       <executiondata>
+         <file file="jacoco.exec"/>
+       </executiondata>
+
+       <!-- the class files and optional source files -->
+       <structure name="JaCoCo Ant Example">
+         <classfiles>
+           <fileset dir="${testdir}"/>
+         </classfiles>
+         <sourcefiles encoding="UTF-8">
+           <fileset dir="${srcdir}"/>
+         </sourcefiles>
+       </structure>
+
+       <!-- to produce reports in different formats. -->
+       <html destdir="${reportdir}"/>
+       <csv destfile="${reportdir}/report.csv"/>
+       <xml destfile="${reportdir}/report.xml"/>
+     </jacoco:report>
    </target>
 </project>
