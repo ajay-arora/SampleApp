@@ -50,10 +50,10 @@
 
     <pathelement location="lib/jacocoagent.jar" />
     <pathelement location="lib/jacocoant.jar" />
-    <pathelement location="lib/org.jacoco.agent-0.7.4.201502262128.jar" />
-    <pathelement location="lib/org.jacoco.ant-0.7.4.201502262128.jar" />
-    <pathelement location="lib/org.jacoco.core-0.7.4.201502262128.jar" />
-    <pathelement location="lib/org.jacoco.report-0.7.4.201502262128.jar" />
+    <pathelement location="lib/org.jacoco.agent-0.7.5.201505241946.jar" />
+    <pathelement location="lib/org.jacoco.ant-0.7.5.201505241946.jar" />
+    <pathelement location="lib/org.jacoco.core-0.7.5.201505241946.jar" />
+    <pathelement location="lib/org.jacoco.report-0.7.5.201505241946.jar" />
 
       <pathelement location="${testdir}" />
       <pathelement location="${srcdir}" />
