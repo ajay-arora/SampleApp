@@ -74,7 +74,6 @@
    </target>
 
    <target name="test" depends="compile">
-    <jacoco:coverage>
       <junit fork="yes" haltonfailure="false" printsummary="true" haltonerror="false" showoutput="false">
          <classpath refid="classpath.test" />
          <formatter type="plain" usefile="false" />
@@ -104,29 +103,6 @@
          </batchtest>
 -->
       </junit>
-    </jacoco:coverage>
    </target>
 
-   <target name="report" depends="test">
-     <jacoco:report>
-       <executiondata>
-         <file file="jacoco.exec"/>
-       </executiondata>
-
-       <!-- the class files and optional source files -->
-       <structure name="JaCoCo Ant Example">
-         <classfiles>
-           <fileset dir="${testdir}"/>
-         </classfiles>
-         <sourcefiles encoding="UTF-8">
-           <fileset dir="${srcdir}"/>
-         </sourcefiles>
-       </structure>
-
-       <!-- to produce reports in different formats. -->
-       <html destdir="${reportdir}"/>
-       <csv destfile="${reportdir}/report.csv"/>
-       <xml destfile="${reportdir}/report.xml"/>
-     </jacoco:report>
-   </target>
 </project>
